@@ -32,7 +32,7 @@ public class CategoryResource {
         return ResponseEntity.ok().body(dto);
     }
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<CategoryDTO> insert(@RequestBody CategoryDTO dto) {
         dto = service.insert(dto);
         // Insere no cabeçalho da resposta o location
@@ -49,5 +49,12 @@ public class CategoryResource {
         dto = service.update(id, dto);
 
         return ResponseEntity.ok().body(dto);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+
+        return ResponseEntity.noContent().build(); //HTTP 204
     }
 }
